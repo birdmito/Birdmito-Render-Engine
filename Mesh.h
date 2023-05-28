@@ -1,18 +1,11 @@
-//
-//  Mesh.h
-//  OpenGL_test
-//
-//  Created by 丁禹斯 on 2023/5/6.
-//
 
 #ifndef Mesh_h
 #define Mesh_h
 
-// Library
+// MARK: - Library
 // -----------------
 // OpenGL API
 #include "glad/glad.h"
-#include "GLFW/glfw3.h"
 
 // glm library
 #include "glm/glm.hpp"
@@ -29,7 +22,7 @@ using namespace std;
 
 #define MAX_BONE_INFLUENCE 4
 
-// Structure
+// MARK: - Structure
 // ------------------
 struct Vertex {
     glm::vec3 Position;
@@ -50,7 +43,7 @@ struct Texture {
     string path;
 };
 
-// Class
+// MARK: - Class
 // ------------------
 class Mesh {
 public:
@@ -77,12 +70,12 @@ private:
     
 };
 
-// Function realization
+// MARK: - Function realization
 // --------------------
 Mesh::Mesh(vector<Vertex> vertices, vector<unsigned int> indices, vector<Texture> textures){
     this->vertices = vertices;
     this->indices = indices;
-    this->texture = textures;
+    this->textures = textures;
     
     setupMesh();
 }
@@ -127,11 +120,11 @@ void Mesh::setupMesh(){
     // Bone IDs
     // ----------
     glEnableVertexAttribArray(5);
-    glVertexAttribPointer(5, 4, GL_INT, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
+    glVertexAttribPointer(5, 4, GL_INT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_BoneIDs));
     
     // Bone weights
     // ----------
-    glEnableVertexAttrbArray(6);
+    glEnableVertexAttribArray(6);
     glVertexAttribPointer(6, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, m_Weights));
     
     glBindVertexArray(0);
@@ -144,7 +137,7 @@ void Mesh::draw(Shader &shader){
     unsigned int normalNr   = 1;
     unsigned int heightNr   = 1;
     
-    for(unsigned int i = 0; i < textures.size(), i++){
+    for(unsigned int i = 0; i < textures.size(); i++){
         //active texture units
         glActiveTexture(GL_TEXTURE0 + i);
         
@@ -169,13 +162,13 @@ void Mesh::draw(Shader &shader){
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     
-    glActiveTexture(GL_TEXTURE0);
     
     //draw mesh
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
     
+    glActiveTexture(GL_TEXTURE0);
     
 }
 #endif /* Mesh_h */

@@ -1,4 +1,4 @@
-// library
+// MARK: - library
 // --------------------
 // OpenGL API
 #include "glad/glad.h"
@@ -15,14 +15,11 @@
 
 // other library
 #include "stb_image.h"
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
 
 // standard library
 #include <iostream>
 
-// function
+// MARK: - function
 // ----------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
@@ -31,7 +28,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
 unsigned int loadTexture(const char* path);
 
-// settings
+// MARK: - settings
 // -----------------------
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
@@ -57,10 +54,11 @@ bool rightButtonPressed = false;
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 glm::vec3 lightColor = glm::vec3(1.0f);
 
+//MARK: - Main
 int main()
 {
 #ifndef INITIALIZATION
-    // glfw: initialize and configure
+    // MARK: - glfw: initialize and configure
     // ------------------------------
     glfwInit();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -105,6 +103,7 @@ int main()
 #endif //INITIALIZATION
 
 #ifndef VERTEX_DATA
+    // MARK: - Vertex data
     // build and compile our shader program
     // ------------------------------------
     Shader cubeShader(vertexShaderSource, fragmentShaderSource);
@@ -220,7 +219,7 @@ int main()
 
 #endif //TEXTURE
     
-    // render loop
+    // MARK: - render loop
     // -------------------------------------------------------------------------------------------
     while (!glfwWindowShouldClose(window))
     {

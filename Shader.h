@@ -16,10 +16,10 @@ using namespace std;
 
 class Shader {
 public:
-	//程序ID
+	//ID
 	unsigned int ID;
 
-	//构建着色器
+	//constructor
 	Shader(const char* vertexPath, const char* fragmentPath);
 	
 	//使用/激活程序
